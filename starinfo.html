@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>星级说明</title>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link href="css/index.css" rel="stylesheet">
+    <script src="js/mui.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script>
+        $(setRem());
+        $(window).resize(function(){
+            setRem()
+        });
+        function setRem(){
+            var w=parseFloat($('html').css('width'));
+            $('html').css('font-size',w/750*40+'px');
+        }
+    </script>
+    <style>
+        .banner{
+            width: 100%;
+            height: 13.65rem;
+            background: url("img/vbg.png");
+            background-size: 100% 100%;
+        }
+        table{
+            width: 100%;
+            background: #FEFDF9;
+            border-radius: .3rem;
+            border-collapse: collapse;
+            color: #333;
+            font-size: .65rem;
+            margin-top: .75rem;
+        }
+        tr{
+            height: 2rem;
+            text-align: center;
+        }
+        table tr:nth-of-type(5),table tr:nth-of-type(6){
+            height: 2.8rem;
+        }
+        table tr:nth-of-type(1){
+            color: #4A362B;
+        }
+        table tr:nth-of-type(1) img{
+            display: none;
+        }
+        table tr:nth-of-type(2n-1){
+            background: #f7efe6;
+        }
+        tr td:first-child{
+            width: 21%;
+        }
+        tr td:nth-of-type(2){
+            width: 36.5%;
+        }
+        td{
+            border: 1px solid #DBD1C9;
+        }
+        table img{
+            width: .75rem;
+            height: .75rem;
+            position: relative;
+            top: .15rem;
+            right: .2rem;
+        }
+        .star-con{
+            background: linear-gradient(#F3E9D8, #CFB593);
+            padding: .8rem .9rem 1.65rem;
+        }
+        .star-con > img{
+            width: 16.3rem;
+            height: 0.9rem;
+            margin: 1.5rem auto .9rem;
+            display: block;
+        }
+        .star-con > img:nth-of-type(1){
+            margin-top: 0;
+        }
+        .star-con p{
+            color: #4A362B;
+            font-size: .75rem;
+            line-height: 1.05rem;
+        }
+        .star-con p i{
+            font-style: normal;
+        }
+        .star-con .tipred{
+            color: #8E1700;
+            font-size: .7rem;
+            margin-top: .5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner"></div>
+    <div class="star-con">
+        <img src="img/ac.png" alt="">
+        <p>用户星级是根据用户在星支付的每月交易总额决定。
+            具体星级规则如下：</p>
+        <table></table>
+        <img src="img/ac2.png" alt="">
+        <p><i>每月1日2:00～5:00</i>，计算上月的月累计交易总额，并更新当前星级；</p>
+        <p class="tipred">注：更新星级可能会存在延时情况</p>
+        <img src="img/ac3.png" alt="">
+        <p>用户每月可领取奖励，不可重复领取，不可累计领取；</p>
+    </div>
+</body>
+</html>
+<script>
+    $(function () {
+        var datajson = [
+            {
+                "grade":'星级',
+                "num":'规则',
+                "prize":'奖励'
+            },
+            {
+                "grade":'一星',
+                "num":'月交易满8000元',
+                "prize":'一'
+            },
+            {
+                "grade":'二星',
+                "num":'月交易满15000元',
+                "prize":'1元手续费折扣券'
+            },
+            {
+                "grade":'三星',
+                "num":'月交易满30000元',
+                "prize":'3元手续费折扣券'
+            },
+            {
+                "grade":'四星',
+                "num":'月交易满50000元',
+                "prize":'5元手续费折扣券'+'<br>'+'优酷视频VIP会员周卡'
+            },
+            {
+                "grade":'五星',
+                "num":'月交易满60000元',
+                "prize":'10元手续费折扣券'+'<br>'+'爱奇艺VIP会员月卡'
+            }
+        ];
+        $.each(datajson,function (i) {
+            $('table').append('<tr><td><img src="img/vicon.png" alt="">'+datajson[i].grade+'</td><td>'+datajson[i].num+'</td><td>'+datajson[i].prize+'</td></tr>')
+        });
+    })
+</script>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>我的VIP</title>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link href="css/myvip.css" rel="stylesheet"/>
+    <link href="css/index.css" rel="stylesheet">
+    <script src="js/mui.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script>
+        $(setRem());
+        $(window).resize(function(){
+            setRem()
+        });
+        function setRem(){
+            var w=parseFloat($('html').css('width'));
+            $('html').css('font-size',w/750*40+'px');
+        }
+    </script>
+</head>
+<body>
+    <div class="head">
+        <div class="tips"><span></span>星级根据每月累计交易总额决定，每月1日更新</div>
+        <div class="star-box">
+            <div class="starinfo"><span></span>星级说明</div>
+            <ul class="star-ul">
+                <li data-star="一星">一星</li>
+                <li data-star="二星">二星</li>
+                <li data-star="三星">三星</li>
+                <li data-star="四星">四星</li>
+                <li data-star="五星">五星</li>
+            </ul>
+            <div class="jinebox">
+                <div>
+                    <p class="lastTradeTotal"></p>
+                    <p>上月累计交易总额(元)</p>
+                </div>
+                <div>
+                    <p class="tradeTotal"></p>
+                    <p>当前累计交易(元)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sele-box">
+        <ul class="select">
+            <li class="star-first">
+                <img src="img/nostart.png" alt="">
+                <p>努力提升星级，就可以领取奖励啦～</p>
+            </li>
+            <li class="hide">
+                <div class="card-box" style="background: url('img/cbg.png')">
+                    <div class="card-name">折扣券</div>
+                    <div class="lqstatus"></div>
+                    <div class="lq-tip">每月领取一次</div>
+                </div>
+            </li>
+            <li class="hide">
+                <div class="card-box" style="background: url('img/cbg.png')">
+                    <div class="card-name">折扣券</div>
+                    <div class="lqstatus">已领取</div>
+                    <div class="lq-tip">每月领取一次</div>
+                </div>
+            </li>
+            <li class="hide">
+                <div class="card-box" style="background: url('img/cbg.png')">
+                    <div class="card-name">折扣券</div>
+                    <div class="lqstatus">已领取</div>
+                    <div class="lq-tip">每月领取一次</div>
+                </div>
+                <div class="card-box" style="background: url('img/ykbg.png')">
+                    <div class="card-name">优酷VIP会员周卡</div>
+                    <div class="lqstatus" data-status="sta">已领取</div>
+                    <div class="lq-tip">每月领取一次</div>
+                </div>
+            </li>
+            <li class="hide">
+                <div class="card-box" style="background: url('img/cbg.png')">
+                    <div class="card-name">折扣券</div>
+                    <div class="lqstatus">已领取</div>
+                    <div class="lq-tip">每月领取一次</div>
+                </div>
+                <div class="card-box" style="background: url('img/aqibg.png')">
+                    <div class="card-name">爱奇艺VIP会员月卡</div>
+                    <div class="lqstatus" data-status="sta">已领取</div>
+                    <div class="lq-tip">每月领取一次</div>
+                </div>
+            </li>
+        </ul>
+        <div class="listurl">查看VIP订单</div>
+    </div>
+    <div class="layer hide">
+        <div class="dialog"></div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    $(function () {
+        //星级点击切换效果
+        $('.activestar').prevAll('li').addClass('bactive');
+        $('.star-ul').on('tap','li',function () {
+            $('.select').find('li').addClass('hide').eq($(this).index()).removeClass('hide');
+            if($(this).hasClass('activestar')){
+                $(this).siblings('li').removeClass('activeli')
+            } else {
+                $(this).addClass('activeli').siblings('li').removeClass('activeli')
+            }
+        });
+
+        var userName = '18213921408';
+        var token = '81add7bdd5148168c60b514c41da0fb4';
+        var url = 'http://192.168.2.85:8081/mposPlus-integral/userVip/myVip';
+        var usergrade = 0;
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                userName: userName,
+                token: token
+            },
+            contentType: 'application/x-www-form-urlencoded',
+            datatype: 'json',
+            success: function (res) {
+                console.log(res);
+                $('.lastTradeTotal').html(res.data.lastTradeTotal);
+                $('.tradeTotal').html(res.data.tradeTotal);
+                if(res.data.userVipLevelDto.vipSign && res.data.userVipLevelDto.vipSign!= null){
+                    var stSign = res.data.userVipLevelDto.vipSign - 1;
+                    usergrade = res.data.userVipLevelDto.grade;
+                    $('.star-ul').find('li').eq(stSign).addClass('activestar').html('<img src="'+res.data.userVipLevelDto.imgPath+'" alt=""><span class="vdj"></span>');
+                    $('.star-ul').addClass('star-ul'+res.data.userVipLevelDto.vipSign).find('.vdj').text($('.vdj').parent('li').data('star'));
+                    $('.select').find('li').eq(stSign).removeClass('hide').siblings('li').addClass('hide');
+                }
+
+                $.each(res.data.prizeLists,function (i) {
+                    if(res.data.prizeLists[i].length == 0){
+                        $('.select').find('li').eq(i-1).nextAll('li').find('.lqstatus').addClass('lqstatusno').html('当前等级不可领取');
+                    } else if(i>0 && res.data.prizeLists[i].length > 0){
+                        $('.select').find('li').eq(i-1).nextAll('li').find('.lqstatus').removeClass('lqstatusno').html('未领取');
+                        var datas = res.data.prizeLists[i][0];
+                        $('.select').find('li').eq(i).find('div').eq(0).data('id',datas.prizeId).data('usergrade',usergrade).data('unrow',datas.unRow);
+                        if(datas.receiveStatus == '01'){
+                            $('.select').find('li').eq(i).find('div').eq(0).find('.lqstatus').addClass('lqstatusno').html('已领取');
+                            console.log($('.select').find('li').eq(i).find('div').eq(0).html())
+                        } else if(datas.receiveStatus == '00'){
+                            $('.select').find('li').eq(i).find('div').eq(0).find('.lqstatus').removeClass('lqstatusno').html('未领取');
+                        }
+
+                        //四星 五星
+                        if(res.data.prizeLists[3].length > 0){
+                            var datast = res.data.prizeLists[3][1];
+                            var divs = $('.select').find('li').eq(3).find('div').eq(0).find('.lqstatus');
+                            if(datas.receiveStatus == '01'){
+                                divs.addClass('lqstatusno').html('已领取');
+                            } else if(datast.receiveStatus == '00'){
+                                divs.removeClass('lqstatusno').html('未领取');
+                            }
+                            $('.select').find('li').eq(3).find('.card-box').eq(1).data('id',datast.prizeId).data('usergrade',usergrade).data('unrow',datast.unRow);
+                        }
+                        if(res.data.prizeLists[4].length > 0){
+                            var datassr = res.data.prizeLists[4][1];
+                            var divac = $('.select').find('li').eq(4).find('div').eq(0).find('.lqstatus');
+                            if(datassr.receiveStatus == '01'){
+                                divac.addClass('lqstatusno').html('已领取');
+                            } else if(datassr.receiveStatus == '00'){
+                                divac.removeClass('lqstatusno').html('未领取');
+                            }
+                            $('.select').find('li').eq(4).find('.card-box').eq(1).data('id',datassr.prizeId).data('usergrade',usergrade).data('unrow',datassr.unRow);
+                        }
+                    }
+                })
+            },
+            error:function () {
+                mui.toast('加载失败！', {
+                    duration: 'short',
+                    type: 'div'
+                })
+            }
+        });
+
+        //领取
+        $('.select').on('tap','div.lqstatus',function () {
+            var htmls = $(this).html();
+            if($(this).parent('div').data('id') && $(this).parent('div').data('usergrade') && $(this).parent('div').data('unrow') && htmls == '未领取'){
+                var that = $(this);
+                $.ajax({
+                    url: 'http://rap2.shxgroup.net/mock/15/vip/gitCoupon',
+                    type: 'POST',
+                    data: {
+                        userName: '15512345678',
+                        token: '5a99d5e4538fa9e3d4704af7560aed94',
+                        marketId: $(this).parent('div').data('id'),
+                        grade: $(this).parent('div').data('usergrade'),
+                        unRow: $(this).parent('div').data('unrow')
+                    },
+                    contentType: 'application/x-www-form-urlencoded',
+                    datatype: 'json',
+                    success: function (res) {
+                        console.log(res);
+                        if(res.code == 200 || res.success == true){
+                            $('.layer').removeClass('hide');
+                            if(that.data('status') == 'sta'){
+                                $('.dialog').html('<img src="img/dialog.png" alt=""><p class="diatit">领取成功</p><p class="dialogtip">已发放至您当前登陆星支付的手机号中，可前往对应官网查看充值结果。</p><div class="btn btnclose close">知道了</div>')
+                            } else if(that.data('status') == undefined) {
+                                $('.dialog').html('<img src="img/dialog.png" alt=""><p class="diatip">领取成功，现在就去使用</p><div class="btn btngo">去使用</div><div class="btn btnreturn close">取消</div>')
+                            }
+                        }
+                    },
+                    error:function () {
+                        mui.toast('加载失败！', {
+                            duration: 'short',
+                            type: 'div'
+                        })
+                    }
+                })
+            }
+        });
+        //关闭弹框
+        $('.dialog').on('tap','.close',function () {
+            $('.layer').addClass('hide');
+            window.location.reload();
+        });
+        //去使用
+        $('.btngo').on('tap',function () {
+            //跳转收款
+        });
+        //跳转星级说明页面
+        $('.starinfo').on('tap',function () {
+            mui.openWindow({
+                url: 'starinfo.html'
+            });
+        });
+
+    })
+</script>

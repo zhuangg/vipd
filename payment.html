@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>购买VIP大礼包</title>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/mui.picker.css">
+    <link rel="stylesheet" href="css/mui.poppicker.css">
+    <link href="css/index.css" rel="stylesheet">
+    <script src="js/mui.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/mui.picker.js"></script>
+    <script src="js/mui.poppicker.js"></script>
+    <script src="js/city.data.js"></script>
+    <script src="js/city.data-3.js"></script>
+    <script>
+        $(setRem());
+        $(window).resize(function(){
+            setRem()
+        });
+        function setRem(){
+            var w=parseFloat($('html').css('width'));
+            $('html').css('font-size',w/750*40+'px');
+        }
+    </script>
+    <style>
+        body{
+            background: #EFEFF3;
+        }
+        .hide{
+            display: none;
+        }
+        .main{
+            width: 100%;
+            margin-bottom: 1.5rem;
+        }
+        .star-box{
+            width: 100%;
+        }
+        .star-box div:nth-of-type(2){
+            position: absolute;
+            top: 6.6rem;
+            left: calc(50% - 8.625rem);
+        }
+        .hx-box div:nth-of-type(2){
+            top: -3.4rem;
+        }
+        .box{
+            width: 17.25rem;
+            padding: .75rem;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: .5rem;
+        }
+        .banner{
+            width: 100%;
+            height: 10.4rem;
+            background-size: 100% 100% !important;
+            position: relative;
+        }
+        .xx-box .banner{
+            background: url("img/xingxuan_bg.png");
+        }
+        .hx-box .banner{
+            background: url("img/huixiang_bg.png");
+        }
+        .commodity{
+            height: 8rem;
+            margin-top: 10.2rem;
+        }
+        .commodity img{
+            width: 15.1rem;
+            height: 4.35rem;
+            margin: .75rem auto 0;
+            display: block;
+        }
+        .uinfo .tit{
+            font-size: .8rem;
+            border: 0;
+            height: 1.7rem;
+        }
+        .uinfo p{
+            border-top: 1px solid #F5F5F5;
+            height: 2.55rem;
+        }
+        .uinfo p span{
+            float: left;
+            color: #666;
+            font-size: .7rem;
+            display: inline-block;
+            height: 2.5rem;
+            line-height: 2.5rem;
+        }
+        .uinfo p input{
+            width: calc(100% - 4em);
+            color: #666;
+            font-size: .7rem;
+            border: 0;
+            height: 2.5rem;
+            line-height: .5rem;
+            margin: 0;
+            padding: 0 0 0 1rem;
+        }
+        .uinfo p:nth-of-type(4) input{
+            padding: 0 0 0 1rem;
+        }
+        .uinfo p textarea{
+            width: calc(100% - 3em);
+            font-size: .7rem;
+            border: 0;
+            line-height: 1.1rem;
+            margin: 0;
+            padding: .7rem 0 0 1.1rem;
+            color: #666;
+        }
+        .uinfo .comright{
+            width: .7rem;
+            height: .7rem;
+            float: right;
+            background: url("img/icon_right.png");
+            background-size: 100% 100%;
+            margin-top: .9rem;
+        }
+        .paymentmethod{
+            height: 13.5rem;
+            margin-top: .5rem;
+        }
+        .bindagreement{
+            margin-top: 2.8rem;
+            line-height: 1.05rem;
+            font-size: .6rem;
+            display: flex;
+            justify-content: center;
+        }
+        .bindagreement .bindchange{
+            display: inline-block;
+            width: .8rem;
+            height: .8rem;
+            background: url(img/icon_weixuan.png);
+            background-size: 100% 100% !important;
+            float: left;
+            margin-top: 0.05rem;
+        }
+        .bindagreement .bindchange.active{
+            background: url("img/icon_gouxuan.png");
+        }
+        .bindagreement .agreement{
+            color: #1E99CD;
+        }
+        .pay-mode{
+            display: flex;
+            justify-content: space-between;
+            margin-top: .75rem;
+        }
+        .pay-mode div{
+            width: 7.5rem;
+            height: 2.5rem;
+            border: 1px solid #f5f5f5;
+            border-radius: .2rem;
+            display: flex;
+            justify-content: center;
+            padding: .5rem 0;
+            line-height: 2.5rem;
+        }
+        .pay-mode div.active{
+            border: 1px solid #D9B084;
+            position: relative;
+        }
+        .pay-mode .active:after{
+            display: inline-block;
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: .65rem;
+            height: .65rem;
+            background: url("img/icon_zhifu_gouxuan.png");
+            background-size: 100%;
+        }
+        .pay-mode img{
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+        .pay-mode span{
+            display: inline-block;
+            line-height: 1.5rem;
+            color: #333;
+            font-size: .75rem;
+            margin-left: .5rem;
+        }
+        .bindpost{
+            width: 15.75rem;
+            height: 2.5rem;
+            line-height: 2.5rem;
+            text-align: center;
+            color: #fff;
+            background: #C4C4C5;
+            font-size: 1rem;
+            border-radius: 1.45rem;
+            margin-top: .7rem;
+        }
+        .bindpost.active{
+            color: #2A201B;
+            background: linear-gradient(#FFE1BE,#E3B885);
+        }
+        .paymenthx{
+            margin-top: 4.9rem;
+        }
+        .order{
+            width: 100%;
+            text-align: center;
+            margin: 1.5rem 0;
+            color: #1E99CD;
+            font-size: .7rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="star-box xx-box">
+            <div class="banner"></div>
+            <div class="uinfo box">
+                <p class="tit">填写收货信息</p>
+                <p><span>收货人</span><input class="namevalue" type="text" placeholder="请输入收货人" maxlength="20"></p>
+                <p><span>手机号</span><input class="phonevalue" type="number" maxlength="11" oninput="if(value.length>11)value=value.slice(0,11)" placeholder="请输入收货手机号码"></p>
+                <p><span>省市区</span><input class="addressvalue" type="text" placeholder="请选择" id="showCityPicker3" readonly="readonly"> <span class="comright"></span></p>
+                <p><span>地&nbsp;&nbsp;&nbsp;址</span><textarea name="" id="addr" cols="2" rows="2" placeholder="请输入具体收货地址" maxlength="200"></textarea></p>
+            </div>
+            <div class="commodity box">
+                <p class="tit">商品</p>
+                <img src="img/xingxuan_card.png" alt="">
+            </div>
+        </div>
+        <div class="star-box hx-box hide">
+            <div class="banner"></div>
+            <div class="commodity box">
+                <p class="tit">商品</p>
+                <img src="img/huixiang_card.png" alt="">
+            </div>
+        </div>
+        <div class="paymentmethod box">
+            <p class="tit">支付方式</p>
+            <div class="pay-mode">
+                <div class="active"><img src="img/icon_zhifubao.png" alt=""><span>支付宝支付</span></div>
+                <div><img src="img/icon_wechat.png" alt=""><span>微信支付</span></div>
+            </div>
+            <div class="bindagreement">
+                <span class="bindchange"></span><span>点击提交订单即表示您已同意</span><span class="agreement">《VIP用户协议》</span>
+            </div>
+            <div class="bindpost">提交订单</div>
+        </div>
+        <div class="order"><span>查看订单</span></div>
+    </div>
+</body>
+</html>
+<script>
+    $(function () {
+        if($('.xx-box').hasClass('hide')){
+            $('.hx-box').siblings('.paymentmethod').addClass('paymenthx');
+        }
+        $('.pay-mode').on('tap','div',function () {
+            $(this).addClass('active').siblings('div').removeClass('active')
+        });
+        $('.bindchange').on('tap',function () {
+            $(this).addClass('active')
+        });
+
+        //地址选择
+        var arr = [];
+        mui.init();
+        mui.ready(function () {
+            // var picker = new mui.PopPicker();
+            var _getParam = function(obj, param) {
+                return obj[param] || '';
+            };
+            var cityPicker3 = new mui.PopPicker({layer: 3});
+            cityPicker3.setData(cityData3);
+
+            console.log(arr);
+            if(arr!=''){
+                cityPicker3.pickers[0].setSelectedValue(arr[0]);
+                var shi = cityPicker3.getSelectedItems()[0].children;
+                var val_shi = arr[1];
+                var val_xian = arr[2];
+                for(var i=0;i<shi.length;i++) {
+                    if(shi[i].value==val_shi) {
+                        cityPicker3.pickers[1].setSelectedIndex(i);
+                        var xian=shi[i].children;
+                        for(var j=0;j<xian.length;j++) {
+                            if(xian[j].value==val_xian) {
+                                cityPicker3.pickers[2].setSelectedIndex(j);
+                            }
+                        }
+                    }
+                }
+            }
+            // console.log(cityData3);
+            // cityPicker3.show(function(items) {});
+            var showCityPickerButton = document.getElementById('showCityPicker3');
+            showCityPickerButton.addEventListener('tap', function(event) {
+                event.preventDefault();
+                cityPicker3.show(function(items) {
+                    console.log(_getParam(items[0], 'text') + " " + _getParam(items[1], 'text') + " " + _getParam(items[2], 'text'));
+                    // console.log(items);
+                    addcode = items[0].value+','+items[1].value+','+items[2].value;
+                    console.log(addcode);
+                    document.getElementById('showCityPicker3').value = _getParam(items[0], 'text') + " " + _getParam(items[1], 'text') + " " + _getParam(items[2], 'text');
+                    //返回 false 可以阻止选择框的关闭
+                    //return false;
+                });
+            }, false);
+        });
+
+        var btnArray = ['取消订单', '支付完成'];
+        var btnArraya = ['否', '是'];
+        var btnArrays = ['出现问题', '支付完成'];
+        // mui.confirm('您有订单正在支付中，请耐心等待...', '支付中', btnArray, function(e) {
+        //     if (e.index == 1) {
+        //         info.innerText = '谢谢你的评语：' + e.value;
+        //     } else {
+        //         info.innerText = '你点了取消按钮';
+        //     }
+        // })
+        // mui.confirm('恭喜您成为星支付VIP会员，是否前往查看您的会员特权？', '支付成功', btnArraya, function(e) {
+        //     if (e.index == 1) {
+        //         info.innerText = '谢谢你的评语：' + e.value;
+        //     } else {
+        //         info.innerText = '你点了取消按钮';
+        //     }
+        // })
+        // mui.confirm('您有订单正在支付中，请耐心等待...', '支付中', btnArrays, function(e) {
+        //     if (e.index == 1) {
+        //         info.innerText = '确定' ;
+        //     } else {
+        //         info.innerText = '你点了取消按钮';
+        //     }
+        // })
+
+
+
+        function postdata() {
+            var namevalue = $('.namevalue').val();
+            var phonevalue = $('.phonevalue').val();
+            var addressvalue = $('.addressvalue').val();
+            var addr = $('#addr').val();
+            //信息验证
+            //var regStr = /[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030/ig;
+            var regPhone = /^[1](([3][0-9])|([4][5-9])|([5][0-3,5-9])|([6][5,6])|([7][0-8])|([8][0-9])|([9][1,8,9]))[0-9]{8}$/;
+            if (namevalue == '') {
+                mui.toast('请输入正确的收货人', {duration: 'short', type: 'div'})
+            } else if (phonevalue == '') {
+                mui.toast('请输入正确的手机号码', {duration: 'short', type: 'div'})
+            } else if (addressvalue == '') {
+                mui.toast('请填写正确的收货地址', {duration: 'short', type: 'div'})
+            } else if (addr == '') {
+                mui.toast('请填写正确的收货地址', {duration: 'short', type: 'div'})
+            } else if (!regPhone.test(phonevalue)) {
+                mui.toast('请输入正确的手机号码', {duration: 'short', type: 'div'})
+            } else if(!$('.bindchange').hasClass('active')){
+                mui.toast('请先勾选VIP用户协议', {duration: 'short', type: 'div'})
+            } else {
+                //信息提交
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        consignee: namevalue,
+                        mobilePhone: phonevalue,
+                        urbanDistrict: addressvalue,
+                        address: addr
+                    },
+                    contentType: 'application/x-www-form-urlencoded',
+                    datatype: 'json',
+                    success: function (res) {
+                        console.log(res);
+                        if (res.code == 200) {
+                            //提交成功
+                            mui.alert('提交成功！', '提示', function () {
+
+                            });
+                        } else {
+                            mui.toast(res.msg, {
+                                duration: 'short',
+                                type: 'div'
+                            })
+                        }
+                    },
+                    error: function () {
+                        mui.toast('加载失败！', {
+                            duration: 'short',
+                            type: 'div'
+                        })
+                    }
+                });
+            }
+        }
+    })
+</script>

@@ -1,0 +1,318 @@
+
+.clear{
+    clear: both;
+}
+.head{
+    width: 100%;
+    /*height: 14.1rem;*/
+    background: #FAFAFA;
+    padding-top: .6rem;
+}
+.tips{
+    color: #333;
+    font-size: .6rem;
+    height: .85rem;
+    line-height: .85rem;
+    margin: 0 .75rem .4rem;
+}
+.tips span{
+    display: inline-block;
+    width: .8rem;
+    height: .8rem;
+    background: url("../img/messicon.png");
+    background-size: 100%;
+    float: left;
+}
+.star-box{
+    width: 100%;
+    height: 10.15rem;
+    background: url("../img/cardbg.png");
+    background-size: 100% 100%;
+    position: relative;
+}
+.starinfo{
+    position: absolute;
+    top: .5rem;
+    right: 1.5rem;
+    /*float: right;*/
+    font-size: .6rem;
+    color: #6F452C;
+    float: left;
+    height: .85rem;
+    line-height: .9rem;
+    z-index: 9;
+}
+.starinfo span{
+    width: .8rem;
+    height: .8rem;
+    line-height: .8rem;
+    display: inline-block;
+    background: url("../img/infoicon.png");
+    background-size: 100% 100%;
+    float: left;
+}
+.star-ul{
+    width: calc(100% - 1.5rem);
+    height: 5.9rem;
+    margin: 0 auto .8rem;
+    padding: 1.7rem 1.05rem 0;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+.star-ul:after{
+    position: absolute;
+    content: '';
+    display: block;
+    width: 100%;
+    height: .1rem;
+    top: 3.8rem;
+    background-size: 100% 100% !important;
+    left: 0;
+}
+.star-ul1:after{
+    background: url("../img/x1.png");
+}
+.star-ul2:after{
+    background: url("../img/x2.png");
+}
+.star-ul3:after{
+    background: url("../img/x3.png");
+}
+.star-ul4:after{
+    background: url("../img/x4.png");
+}
+.star-ul5:after{
+    background: url("../img/x5.png");
+}
+.star-ul li{
+    /*width: 18%;*/
+    width: 1.9rem;
+    height: 1rem;
+    line-height: 1rem;
+    border: 1px solid #A07452;
+    margin: 1.6rem 0;
+    border-radius: .5rem;
+    text-align: center;
+    font-size: .6rem;
+    color: #A07452;
+    position: relative;
+    z-index: 2;
+}
+.star-ul li.activestar{
+    /*width: 25%;*/
+    width: auto;
+    height: auto;
+    border: 0;
+    border-radius: 0;
+    margin: 0;
+}
+.star-ul li.bactive{
+    background: #FFFAEE;
+    color: #A07452;
+    border: 0;
+}
+.star-ul li.activeli{
+    background: #A07452;
+    color: #FFFAEE;
+}
+.star-ul li.activestar img{
+    display: inline-block;
+    width: 3.35rem;
+    height: 3.35rem;
+    border-radius: 50%;
+    border: .1rem solid #FFFAEE;
+    z-index: 10;
+    position: relative;
+}
+.star-ul li.activestar span{
+    width: 3.15rem;
+    height: 1.35rem;
+    display: inline-block;
+    background-size: 100% 100% !important;
+}
+.star-ul li.activestar span{
+    background: url("../img/vipicon.png");
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: .6rem;
+    color: #FFFAEE;
+    line-height: 1.48rem;
+    padding-left: 1.1rem;
+    z-index: 10;
+}
+
+.jinebox{
+    width: calc(100% - 1.5rem);
+    margin: 0 auto;
+    display: flex;
+
+}
+.jinebox div{
+    width: 50%;
+    height: 2.3rem;
+    position: relative;
+    text-align: center;
+}
+.jinebox div:first-of-type:after{
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 1.5rem;
+    background: #6F452C;
+    opacity: .27;
+    border-radius: 1px;
+    position: absolute;
+    right: 0;
+    top: .4rem;
+}
+.jinebox p{
+    color: #6F452C;
+}
+.jinebox >div p:first-of-type{
+    font-size: 1rem;
+    height: 1.4rem;
+    line-height: 1.4rem;
+}
+.jinebox >div p:last-of-type{
+    font-size: .6rem;
+    height: .85rem;
+    line-height: .85rem;
+}
+
+.select li{
+    /*display: none;*/
+}
+.sele-box{
+    width: 100%;
+}
+.select{
+    width: 100%;
+}
+.star-first img{
+    display: block;
+    width: 5rem;
+    height: 5rem;
+    margin: 0 auto .75rem;
+}
+.star-first p{
+    text-align: center;
+    font-size: .7rem;
+    color: #818181;
+}
+
+/*卡*/
+.card-box{
+    width: 16.65rem;
+    height: 5.9rem;
+    background-size: 100% 100% !important;
+    margin: 0 auto;
+    padding: .9rem 1.2rem .2rem;
+    color: #fff;
+    position: relative;
+}
+.card-name{
+    font-size: .9rem;
+    line-height: 1.5;
+}
+.lqstatus{
+    font-size: .65rem;
+    position: absolute;
+    right: 1rem;
+    top: .9rem;
+    border-radius: .8rem;
+    padding: .15rem .8rem;
+    border: 1px solid #fff;
+}
+.lqstatusno{
+    background: rgba(0,0,0,.2);
+    border: 0;
+}
+.lq-tip{
+    font-size: .6rem;
+    position: absolute;
+    bottom: .9rem;
+}
+
+.listurl{
+    width: 6em;
+    text-align: center;
+    font-size: .7rem;
+    color: #1E99CD;
+    /*margin: 0 auto;*/
+    position: fixed;
+    bottom: 1.5rem;
+    left: calc(50% - 3em);
+}
+/*dialog*/
+.layer{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.5);
+    z-index: 99;
+}
+.dialog{
+    /*position: fixed;*/
+    width: 13.5rem;
+    height: 10.5rem;
+    background: linear-gradient(#fff,#FFF3F3);
+    margin: 7.5rem auto 0;
+    border-radius: .5rem;
+    padding-top: 2.75rem;
+    position: relative;
+}
+.dialog img{
+    width: 6.85rem;
+    height: 6.5rem;
+    display: block;
+    position: absolute;
+    top: -4.2rem;
+    left: 3.425rem;
+}
+.diatit{
+    font-size: .8rem;
+    color: #CD985E;
+    text-align: center;
+}
+
+.dialogtip{
+    font-size: .65rem;
+    color: #333;
+    padding: .5rem .8rem 0 1.8rem;
+}
+.dialog .btn{
+    display: inline-block;
+    width: 5.25rem;
+    height: 1.5rem;
+    line-height: 1.49rem;
+    text-align: center;
+    font-size: .8rem;
+    border-radius: .8rem;
+    color: #fff;
+    background: linear-gradient(#E4BA86,#CD985E);
+    margin: 0 auto;
+    position: absolute;
+    bottom: 1rem;
+}
+.dialog .btnclose{
+    display: block;
+    left: calc(50% - 2.625rem);
+}
+.dialog .diatip{
+    font-size: .8rem;
+    color: #333;
+    text-align: center;
+    margin-top: 2rem;
+}
+.dialog .btnreturn{
+    left: 1.25rem;
+    color: #CD995F;
+    background: none;
+    border: 1px solid #CD995F;
+}
+.dialog .btngo{
+    right: 1.25rem;
+}
