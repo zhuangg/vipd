@@ -37,3 +37,6 @@ p{
 		:-moz-placeholder { /* Firefox 18- */ 
 		 color: red;
 		}
+input::placeholder {
+color: red;
+}
