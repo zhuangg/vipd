@@ -300,6 +300,8 @@
             // cityPicker3.show(function(items) {});
             var showCityPickerButton = document.getElementById('showCityPicker3');
             showCityPickerButton.addEventListener('tap', function(event) {
+                $('input').onblur();
+                console.log('blur');
                 event.preventDefault();
                 cityPicker3.show(function(items) {
                     console.log(_getParam(items[0], 'text') + " " + _getParam(items[1], 'text') + " " + _getParam(items[2], 'text'));
