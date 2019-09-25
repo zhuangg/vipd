@@ -306,7 +306,7 @@ input:-ms-input-placeholder{
             // cityPicker3.show(function(items) {});
             var showCityPickerButton = document.getElementById('showCityPicker3');
             showCityPickerButton.addEventListener('tap', function(event) {
-                $('input').onblur();
+                $('input').blur();
                 console.log('blur');
                 event.preventDefault();
                 cityPicker3.show(function(items) {
